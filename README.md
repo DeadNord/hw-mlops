@@ -1,32 +1,40 @@
 ## Usage
 
-1. **Export model**
+1. **Install dev tools**
+
+   ```bash
+   bash install_dev_tools.sh
+   ```
+
+   This idempotent script checks for Docker, Python, and required ML libraries.
+
+2. **Export model**
 
    ```bash
    python export_model.py
    ```
 
-2. **Run inference**
+3. **Run inference**
 
    ```bash
    python inference.py db/test-img.jpg
    ```
 
-3. **Build images**
+4. **Build images**
 
    ```bash
    docker build -t mobilenet-fat -f Dockerfile.fat .
    docker build -t mobilenet-slim -f Dockerfile.slim .
    ```
 
-4. **Run container**
+5. **Run container**
 
    ```bash
-   docker run --rm mobilenet-fat db/test-img.jpg
-   docker run --rm mobilenet-slim db/test-img.jpg
+   docker run --rm mobilenet-fat
+   docker run --rm mobilenet-slim
    ```
 
-5. **Check model**
+6. **Check model**
 
    ```bash
    docker images mobilenet-fat mobilenet-slim

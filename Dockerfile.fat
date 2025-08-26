@@ -9,4 +9,5 @@ RUN apt-get update \
 
 COPY model.pt inference.py db/test-img.jpg ./
 
-CMD ["python3", "inference.py", "test-img.jpg"]
+ENTRYPOINT ["python3", "inference.py"]
+CMD ["test-img.jpg"]
