@@ -25,3 +25,11 @@
    docker run --rm mobilenet-fat db/test-img.jpg
    docker run --rm mobilenet-slim db/test-img.jpg
    ```
+
+5. **Check model**
+
+   ```bash
+   docker images mobilenet-fat mobilenet-slim
+   docker history mobilenet-fat
+   docker history mobilenet-slim
+   ```

@@ -7,6 +7,6 @@ RUN apt-get update \
     && pip3 install --no-cache-dir torch torchvision pillow \
     && rm -rf /var/lib/apt/lists/*
 
-COPY model.pt inference.py sample.jpg ./
+COPY model.pt inference.py db/test-img.jpg ./
 
-CMD ["python3", "inference.py", "sample.jpg"]
+CMD ["python3", "inference.py", "test-img.jpg"]

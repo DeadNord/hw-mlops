@@ -17,7 +17,7 @@ install_docker() {
         install -m 0755 -d /etc/apt/keyrings
         curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg
         chmod a+r /etc/apt/keyrings/docker.gpg
-        echo \"deb [arch=\$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \$(lsb_release -cs) stable\" > /etc/apt/sources.list.d/docker.list
+        echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" > /etc/apt/sources.list.d/docker.list
         apt-get update && apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
     else
         echo "Docker already installed: $(docker --version)"
@@ -36,6 +36,10 @@ install_docker_compose() {
 install_python() {
     if command_exists python3 && python3 -c 'import sys; sys.exit(0 if sys.version_info >= (3,9) else 1)'; then
         echo "Python >=3.9 already installed: $(python3 --version)"
+        if ! command_exists pip; then
+            echo "Installing pip..."
+            apt-get update && apt-get install -y python3-pip
+        fi
     else
         echo "Installing Python 3.10 and pip..."
         apt-get update && apt-get install -y python3.10 python3-pip
@@ -59,7 +63,11 @@ main() {
     install_docker
     install_docker_compose
     install_python
-    install_pip_packages
+    if command_exists pip; then
+        install_pip_packages
+    else
+        echo "pip command not found, skipping Python package installation"
+    fi
 
     echo "\nVersions:"
     docker --version || true
