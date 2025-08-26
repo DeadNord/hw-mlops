@@ -3,7 +3,7 @@
 1. **Install dev tools**
 
    ```bash
-   bash install_dev_tools.sh
+   bash lesson-3/install_dev_tools.sh
    ```
 
    This idempotent script checks for Docker, Python, and required ML libraries.
@@ -11,13 +11,13 @@
 2. **Export model**
 
    ```bash
-   python export_model.py
+   python lesson-3/export_model.py
    ```
 
 3. **Run inference**
 
    ```bash
-   python inference.py db/test-img.jpg
+   python lesson-3/inference.py lesson-3/db/test-img.jpg
    ```
 
 4. **Build images**

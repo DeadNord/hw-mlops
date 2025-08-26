@@ -1,4 +1,5 @@
-import argparse
+import argparse, sys
+from pathlib import Path
 import torch
 from PIL import Image
 from torchvision.models import MobileNet_V2_Weights
@@ -17,12 +18,22 @@ def preprocess(image_path: str, weights: MobileNet_V2_Weights):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Run inference with a TorchScript MobileNetV2 model")
+    parser = argparse.ArgumentParser(
+        description="Run inference with a TorchScript MobileNetV2 model"
+    )
     parser.add_argument("image", help="Path to input image")
-    parser.add_argument("--model", default="model.pt", help="Path to TorchScript model")
+    default_model = Path(__file__).resolve().parent / "model.pt"
+    parser.add_argument(
+        "--model", default=str(default_model), help="Path to TorchScript model"
+    )
     args = parser.parse_args()
 
     weights = MobileNet_V2_Weights.DEFAULT
+    model = load_model(args.model)
+    if not Path(args.model).exists():
+        sys.exit(
+            f"Model file not found: {args.model}. Run 'python export_model.py' first or pass --model PATH."
+        )
     model = load_model(args.model)
     img = preprocess(args.image, weights)
 
