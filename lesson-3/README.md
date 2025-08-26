@@ -1,9 +1,15 @@
 ## Usage
 
+0. **CD**
+
+   ```bash
+   cd lesson-3
+   ```
+
 1. **Install dev tools**
 
    ```bash
-   bash lesson-3/install_dev_tools.sh
+   bash install_dev_tools.sh
    ```
 
    This idempotent script checks for Docker, Python, and required ML libraries.
@@ -11,13 +17,13 @@
 2. **Export model**
 
    ```bash
-   python lesson-3/export_model.py
+   python export_model.py
    ```
 
 3. **Run inference**
 
    ```bash
-   python lesson-3/inference.py lesson-3/db/test-img.jpg
+   python inference.py db/test-img.jpg
    ```
 
 4. **Build images**
@@ -37,7 +43,8 @@
 6. **Check model**
 
    ```bash
-   docker images mobilenet-fat mobilenet-slim
-   docker history mobilenet-fat
-   docker history mobilenet-slim
+   docker images mobilenet-fat
+   docker images mobilenet-slim
+   docker history mobilenet-fat  --format '{{.ID}}' | wc -l
+   docker history mobilenet-slim --format '{{.ID}}' | wc -l
    ```
