@@ -25,12 +25,12 @@ install_docker() {
 }
 
 install_docker_compose() {
-    if ! command_exists docker-compose; then
-        echo "Installing Docker Compose plugin..."
-        apt-get update && apt-get install -y docker-compose-plugin
-    else
-        echo "Docker Compose already installed: $(docker-compose --version)"
-    fi
+  if docker compose version >/dev/null 2>&1; then
+    echo "Docker Compose plugin already installed: $(docker compose version)"
+  else
+    echo "Installing Docker Compose plugin..."
+    apt-get update && apt-get install -y docker-compose-plugin
+  fi
 }
 
 install_python() {
