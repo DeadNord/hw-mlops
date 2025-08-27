@@ -1,62 +1,63 @@
-# Guide to HW
+# Terraform AWS VPC and EKS Infrastructure
 
-# Ініціалізація S3-бакету та DynamoDB-таблиці:
+This project provisions a complete environment on AWS using Terraform. It includes a backend for storing state in S3 with DynamoDB locking, a VPC network, and an EKS cluster.
+
+## Preparation
+
+1. Install Terraform (>=1.6), AWS CLI and kubectl.
+2. Configure AWS credentials (profile or environment variables).
+3. Copy `terraform.tfvars.example` to `terraform.tfvars` and adjust variables.
+
+## 1. Provision backend (S3 + DynamoDB)
+
 ```bash
-aws s3api create-bucket \
-    --bucket hw-5-terraform \
-    --region eu-central-1 \
-    --create-bucket-configuration LocationConstraint=eu-central-1
-
-aws dynamodb create-table \
-    --table-name terraform-locks \
-    --attribute-definitions AttributeName=LockID,AttributeType=S \
-    --key-schema            AttributeName=LockID,KeyType=HASH \
-    --billing-mode PAY_PER_REQUEST \
-    --region eu-central-1
+cd backend
+terraform init
+terraform apply -var="bucket_name=<unique-bucket>" -var="dynamodb_table_name=<table-name>"
 ```
 
-# Ініціалізація Terraform:
+Save the outputs for later:
+
 ```bash
-cd ./src
-# terraform init
-terraform init -migrate-state
-terraform init -reconfigure
+terraform output -raw bucket_name
+terraform output -raw dynamodb_table_name
 ```
 
-# Підключення Terraform до S3-бакету та DynamoDB-таблиці:
-```bash
-terraform import module.s3_backend.aws_s3_bucket.this  hw-5-6-terraform
-terraform import module.s3_backend.aws_dynamodb_table.this terraform-locks
-```
-# Check
-```bash
-terraform state list | grep module.s3_backend
-```
+## 2. Create VPC
 
-# Використання Terraform:
 ```bash
-terraform validate
-terraform plan
-terraform apply
+cd ../vpc
+terraform init \
+  -backend-config="bucket=<bucket_name>" \
+  -backend-config="key=vpc/terraform.tfstate" \
+  -backend-config="region=<region>" \
+  -backend-config="dynamodb_table=<dynamodb_table_name>"
+terraform apply -var-file=../terraform.tfvars
 ```
 
-# Перевірка роботи:
+## 3. Create EKS cluster
+
 ```bash
-terraform output
-terraform output -raw cluster_name
+cd ../eks
+terraform init \
+  -backend-config="bucket=<bucket_name>" \
+  -backend-config="key=eks/terraform.tfstate" \
+  -backend-config="region=<region>" \
+  -backend-config="dynamodb_table=<dynamodb_table_name>"
+terraform apply -var-file=../terraform.tfvars
 ```
 
-# Перевірка нодів:
+## 4. Access the cluster
+
 ```bash
-kubectl get pods
-kubectl get hpa
+aws eks --region <region> update-kubeconfig --name $(terraform output -raw cluster_name)
+kubectl get nodes
 ```
 
-# Видалення ресурсів:
+## 5. Destroy infrastructure
+
 ```bash
-terraform destroy
-
-cd ../
-
-bash purge-and-delete-s3.sh hw-5-6-terraform eu-central-1
+cd eks && terraform destroy
+cd ../vpc && terraform destroy
+cd ../backend && terraform destroy
 ```
