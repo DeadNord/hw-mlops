@@ -39,3 +39,18 @@ variable "profile" {
   type        = string
   default     = null
 }
+
+variable "enable_nat_gateway" {
+  description = "Whether to create NAT gateways"
+  type        = bool
+}
+
+variable "enable_dns_hostnames" {
+  description = "Enable DNS hostnames in the VPC"
+  type        = bool
+}
+
+variable "enable_dns_support" {
+  description = "Enable DNS support in the VPC"
+  type        = bool
+}

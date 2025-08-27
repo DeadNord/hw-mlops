@@ -1,13 +1,16 @@
 module "vpc" {
   source = "./vpc"
 
-  name             = var.vpc_name
-  cidr             = var.vpc_cidr
-  azs              = var.availability_zones
-  public_subnets   = var.public_subnets
-  private_subnets  = var.private_subnets
-  region           = var.region
-  profile          = var.profile
+  name                 = var.vpc_name
+  cidr                 = var.vpc_cidr
+  azs                  = var.availability_zones
+  public_subnets       = var.public_subnets
+  private_subnets      = var.private_subnets
+  enable_nat_gateway   = var.enable_nat_gateway
+  enable_dns_hostnames = var.enable_dns_hostnames
+  enable_dns_support   = var.enable_dns_support
+  region               = var.region
+  profile              = var.profile
 }
 
 module "eks" {
@@ -27,9 +30,11 @@ module "eks" {
   gpu_max_size     = var.gpu_max_size
   gpu_desired_size = var.gpu_desired_size
 
-  vpc_state_bucket = var.backend_bucket
-  vpc_state_key    = var.vpc_state_key
-  vpc_state_region = var.region
-  region           = var.region
-  profile          = var.profile
+  vpc_state_bucket                = var.backend_bucket
+  vpc_state_key                   = var.vpc_state_key
+  vpc_state_region                = var.region
+  cluster_endpoint_public_access  = var.cluster_endpoint_public_access
+  cluster_endpoint_private_access = var.cluster_endpoint_private_access
+  region                          = var.region
+  profile                         = var.profile
 }

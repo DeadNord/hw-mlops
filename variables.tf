@@ -112,3 +112,38 @@ variable "gpu_desired_size" {
   type        = number
   default     = 0
 }
+
+variable "enable_nat_gateway" {
+  description = "Whether to create NAT gateways"
+  type        = bool
+}
+
+variable "enable_dns_hostnames" {
+  description = "Enable DNS hostnames in the VPC"
+  type        = bool
+}
+
+variable "enable_dns_support" {
+  description = "Enable DNS support in the VPC"
+  type        = bool
+}
+
+variable "cluster_endpoint_public_access" {
+  description = "Enable public access for the EKS cluster endpoint"
+  type        = bool
+}
+
+variable "cluster_endpoint_private_access" {
+  description = "Enable private access for the EKS cluster endpoint"
+  type        = bool
+}
+
+variable "billing_mode" {
+  description = "Billing mode for DynamoDB table"
+  type        = string
+}
+
+variable "force_destroy" {
+  description = "Whether to force destroy the S3 bucket"
+  type        = bool
+}

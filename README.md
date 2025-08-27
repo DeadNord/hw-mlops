@@ -13,6 +13,8 @@ This project provisions a complete environment on AWS using Terraform. It includ
 ```bash
 cd backend
 terraform init
+terraform validate
+terraform plan
 terraform apply -var="bucket_name=<unique-bucket>" -var="dynamodb_table_name=<table-name>"
 ```
 

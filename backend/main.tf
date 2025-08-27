@@ -18,12 +18,12 @@ module "s3_bucket" {
   version = "~> 4.1"
 
   bucket        = var.bucket_name
-  force_destroy = true
+  force_destroy = var.force_destroy
 }
 
 resource "aws_dynamodb_table" "locks" {
   name         = var.dynamodb_table_name
-  billing_mode = "PAY_PER_REQUEST"
+  billing_mode = var.billing_mode
   hash_key     = "LockID"
 
   attribute {
