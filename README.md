@@ -19,7 +19,6 @@ terraform apply -var-file=../terraform.tfvars
 ```
 
 Save the outputs for later:
-
 ```bash
 terraform output -raw backend_bucket
 terraform output -raw backend_dynamodb_table
@@ -30,10 +29,10 @@ terraform output -raw backend_dynamodb_table
 ```bash
 cd ../vpc
 terraform init \
-  -backend-config="bucket=<backend_bucket>" \
+  -backend-config="bucket=hw-5-6-terraform-state-bucket" \
   -backend-config="key=vpc/terraform.tfstate" \
-  -backend-config="region=<region>" \
-  -backend-config="dynamodb_table=<backend_dynamodb_table>"
+  -backend-config="region=eu-central-1" \
+  -backend-config="use_lockfile=true"
 terraform validate
 terraform plan  -var-file=../terraform.tfvars
 terraform apply -var-file=../terraform.tfvars
