@@ -10,19 +10,20 @@ terraform {
 }
 
 provider "aws" {
-  region = var.region
+  region  = var.region
+  profile = var.profile
 }
 
 module "s3_bucket" {
   source  = "terraform-aws-modules/s3-bucket/aws"
   version = "~> 4.1"
 
-  bucket        = var.bucket_name
+  bucket        = var.backend_bucket
   force_destroy = var.force_destroy
 }
 
 resource "aws_dynamodb_table" "locks" {
-  name         = var.dynamodb_table_name
+  name         = var.backend_dynamodb_table
   billing_mode = var.billing_mode
   hash_key     = "LockID"
 

@@ -4,12 +4,19 @@ variable "region" {
   default     = "eu-central-1"
 }
 
-variable "bucket_name" {
+variable "profile" {
+  description = "AWS profile"
+  type        = string
+  default     = null
+}
+
+
+variable "backend_bucket" {
   description = "S3 bucket name for Terraform state"
   type        = string
 }
 
-variable "dynamodb_table_name" {
+variable "backend_dynamodb_table" {
   description = "DynamoDB table name for state locking"
   type        = string
 }
