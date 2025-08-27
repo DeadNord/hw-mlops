@@ -1,14 +1,14 @@
-variable "name" {
+variable "vpc_name" {
   description = "Name of the VPC"
   type        = string
 }
 
-variable "cidr" {
+variable "vpc_cidr" {
   description = "CIDR block for the VPC"
   type        = string
 }
 
-variable "azs" {
+variable "availability_zones" {
   description = "Availability zones"
   type        = list(string)
 }

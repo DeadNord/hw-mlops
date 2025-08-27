@@ -1,14 +1,15 @@
 module "vpc" {
   source = "./vpc"
 
-  name                 = var.vpc_name
-  cidr                 = var.vpc_cidr
-  azs                  = var.availability_zones
+  vpc_name             = var.vpc_name
+  vpc_cidr             = var.vpc_cidr
+  availability_zones   = var.availability_zones
   public_subnets       = var.public_subnets
   private_subnets      = var.private_subnets
   enable_nat_gateway   = var.enable_nat_gateway
   enable_dns_hostnames = var.enable_dns_hostnames
   enable_dns_support   = var.enable_dns_support
+  tags                 = var.tags
   region               = var.region
   profile              = var.profile
 }
@@ -37,4 +38,5 @@ module "eks" {
   cluster_endpoint_private_access = var.cluster_endpoint_private_access
   region                          = var.region
   profile                         = var.profile
+  tags                            = var.tags
 }

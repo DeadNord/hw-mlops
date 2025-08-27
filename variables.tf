@@ -147,3 +147,9 @@ variable "force_destroy" {
   description = "Whether to force destroy the S3 bucket"
   type        = bool
 }
+
+variable "tags" {
+  description = "Common tags applied to resources"
+  type        = map(string)
+  default     = {}
+}
