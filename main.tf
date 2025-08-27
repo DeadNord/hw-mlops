@@ -31,9 +31,9 @@ module "eks" {
   gpu_max_size     = var.gpu_max_size
   gpu_desired_size = var.gpu_desired_size
 
-  vpc_state_bucket                = var.backend_bucket
-  vpc_state_key                   = var.vpc_state_key
-  vpc_state_region                = var.region
+  vpc_state_bucket = var.vpc_state_bucket
+  vpc_state_key    = var.vpc_state_key
+  vpc_state_region = var.vpc_state_region
   cluster_endpoint_public_access  = var.cluster_endpoint_public_access
   cluster_endpoint_private_access = var.cluster_endpoint_private_access
   region                          = var.region

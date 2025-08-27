@@ -20,6 +20,9 @@ enable_dns_support   = true
 #EKS
 cluster_name    = "hw-5-6-eks"
 cluster_version = "1.29"
+vpc_state_bucket = "hw-5-6-terraform-state-bucket"
+vpc_state_key    = "vpc/terraform.tfstate"
+vpc_state_region = "eu-central-1"
 cluster_endpoint_public_access  = true
 cluster_endpoint_private_access = true
 

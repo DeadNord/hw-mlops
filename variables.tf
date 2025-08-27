@@ -153,3 +153,13 @@ variable "tags" {
   type        = map(string)
   default     = {}
 }
+
+variable "vpc_state_bucket" {
+  description = "S3 bucket containing VPC state"
+  type        = string
+}
+
+variable "vpc_state_region" {
+  description = "Region of the VPC state bucket"
+  type        = string
+}

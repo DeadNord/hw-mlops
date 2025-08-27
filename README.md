@@ -43,10 +43,10 @@ terraform apply -var-file=../terraform.tfvars
 ```bash
 cd ../eks
 terraform init \
-  -backend-config="bucket=<bucket_name>" \
+  -backend-config="bucket=hw-5-6-terraform-state-bucket" \
   -backend-config="key=eks/terraform.tfstate" \
-  -backend-config="region=<region>" \
-  -backend-config="dynamodb_table=<dynamodb_table_name>"
+  -backend-config="region=eu-central-1" \
+  -backend-config="use_lockfile=true"
 terraform validate
 terraform plan  -var-file=../terraform.tfvars
 terraform apply -var-file=../terraform.tfvars
@@ -55,7 +55,7 @@ terraform apply -var-file=../terraform.tfvars
 ## 4. Access the cluster
 
 ```bash
-aws eks --region <region> update-kubeconfig --name $(terraform output -raw cluster_name)
+aws eks --region eu-central-1 update-kubeconfig --name $(terraform output -raw cluster_name)
 kubectl get nodes
 ```
 
