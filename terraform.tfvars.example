@@ -1,0 +1,16 @@
+github_user      = "DeadNord"
+github_pat       = ""
+github_repo_url  = "https://github.com/DeadNord/my-linux-hw.git"
+github_branch    = "final-project"
+github_repo_name = "my-linux-hw"
+project_name     = "django-devops-fp-app"
+cluster_name     = "eks-cluster-devops-fp"
+vpc_name         = "vpc-devops-fp"
+repository_name  = "ecr-repo-devops-fp"
+prometheus_name  = "kube-prometheus-stack"
+
+rds_password                = ""
+rds_publicly_accessible     = true
+rds_use_aurora              = false
+rds_multi_az                = false
+rds_backup_retention_period = "0"

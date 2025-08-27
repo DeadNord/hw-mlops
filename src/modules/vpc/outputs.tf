@@ -1,19 +1,29 @@
 output "vpc_id" {
-  description = "ID VPC"
-  value       = aws_vpc.this.id
+  description = "ID створеної VPC"
+  value       = aws_vpc.main.id
 }
 
-output "public_subnet_ids" {
-  description = "ID усіх public-subnet"
+output "public_subnets" {
+  description = "Список ID публічних підмереж"
   value       = aws_subnet.public[*].id
 }
 
-output "private_subnet_ids" {
-  description = "ID усіх private-subnet"
+output "private_subnets" {
+  description = "Список ID приватних підмереж"
   value       = aws_subnet.private[*].id
 }
 
-output "nat_gateway_id" {
-  description = "Єдиний NAT Gateway"
-  value       = aws_nat_gateway.this.id
+output "internet_gateway_id" {
+  description = "ID Internet Gateway"
+  value       = aws_internet_gateway.igw.id
 }
+
+output "vpc_cidr_block" {
+  description = "CIDR блок створеної VPC"
+  value       = aws_vpc.main.cidr_block
+}
+
+#output "nat_gateway_id" {
+#  description = "ID NAT-інстансу"
+#  value       = aws_nat_gateway.nat.id
+#}
