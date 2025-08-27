@@ -14,15 +14,15 @@ This project provisions a complete environment on AWS using Terraform. It includ
 cd backend
 terraform init
 terraform validate
-terraform plan
-terraform apply -var="bucket_name=<unique-bucket>" -var="dynamodb_table_name=<table-name>"
+terraform plan  -var-file=../terraform.tfvars
+terraform apply -var-file=../terraform.tfvars
 ```
 
 Save the outputs for later:
 
 ```bash
-terraform output -raw bucket_name
-terraform output -raw dynamodb_table_name
+terraform output -raw backend_bucket
+terraform output -raw backend_dynamodb_table
 ```
 
 ## 2. Create VPC
@@ -30,10 +30,12 @@ terraform output -raw dynamodb_table_name
 ```bash
 cd ../vpc
 terraform init \
-  -backend-config="bucket=<bucket_name>" \
+  -backend-config="bucket=<backend_bucket>" \
   -backend-config="key=vpc/terraform.tfstate" \
   -backend-config="region=<region>" \
-  -backend-config="dynamodb_table=<dynamodb_table_name>"
+  -backend-config="dynamodb_table=<backend_dynamodb_table>"
+terraform validate
+terraform plan  -var-file=../terraform.tfvars
 terraform apply -var-file=../terraform.tfvars
 ```
 
@@ -46,6 +48,8 @@ terraform init \
   -backend-config="key=eks/terraform.tfstate" \
   -backend-config="region=<region>" \
   -backend-config="dynamodb_table=<dynamodb_table_name>"
+terraform validate
+terraform plan  -var-file=../terraform.tfvars
 terraform apply -var-file=../terraform.tfvars
 ```
 
@@ -59,7 +63,7 @@ kubectl get nodes
 ## 5. Destroy infrastructure
 
 ```bash
-cd eks && terraform destroy
-cd ../vpc && terraform destroy
-cd ../backend && terraform destroy
+cd eks && terraform destroy -var-file=../terraform.tfvars
+cd ../vpc && terraform destroy -var-file=../terraform.tfvars
+cd ../backend && terraform destroy -var-file=../terraform.tfvars
 ```
