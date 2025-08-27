@@ -1,16 +1,25 @@
-github_user      = "DeadNord"
-github_pat       = ""
-github_repo_url  = "https://github.com/DeadNord/my-linux-hw.git"
-github_branch    = "final-project"
-github_repo_name = "my-linux-hw"
-project_name     = "django-devops-fp-app"
-cluster_name     = "eks-cluster-devops-fp"
-vpc_name         = "vpc-devops-fp"
-repository_name  = "ecr-repo-devops-fp"
-prometheus_name  = "kube-prometheus-stack"
+region  = "eu-central-1"
+profile = "default"
 
-rds_password                = ""
-rds_publicly_accessible     = true
-rds_use_aurora              = false
-rds_multi_az                = false
-rds_backup_retention_period = "0"
+backend_bucket         = "your-terraform-state-bucket"
+backend_dynamodb_table = "terraform-locks"
+
+vpc_name    = "demo-vpc"
+vpc_cidr    = "10.0.0.0/16"
+public_subnets = ["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"]
+private_subnets = ["10.0.4.0/24", "10.0.5.0/24", "10.0.6.0/24"]
+availability_zones = ["eu-central-1a", "eu-central-1b", "eu-central-1c"]
+
+cluster_name    = "demo-eks"
+cluster_version = "1.29"
+
+cpu_instance_type = "t3.medium"
+gpu_instance_type = "g4dn.xlarge"
+
+cpu_min_size     = 1
+cpu_max_size     = 3
+cpu_desired_size = 2
+
+gpu_min_size     = 0
+gpu_max_size     = 1
+gpu_desired_size = 0
