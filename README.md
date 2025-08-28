@@ -55,6 +55,7 @@ terraform apply -var-file=../terraform.tfvars -auto-approve
 ## 4. Access the cluster
 
 ```bash
+cd ../
 aws eks --region eu-central-1 update-kubeconfig --name $(terraform output -raw cluster_name)
 kubectl get nodes
 ```

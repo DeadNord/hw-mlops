@@ -22,10 +22,11 @@ module "eks" {
   cluster_endpoint_public_access  = var.cluster_endpoint_public_access
   cluster_endpoint_private_access = var.cluster_endpoint_private_access
 
+  enable_cluster_creator_admin_permissions = true
+
   access_entries = {
     creator = {
       principal_arn     = data.aws_caller_identity.current.arn
-      kubernetes_groups = ["system:masters"]
       policy_associations = {
         cluster_admin = {
           policy_arn = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy"
