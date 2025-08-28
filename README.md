@@ -20,6 +20,7 @@ terraform apply -var-file=../terraform.tfvars -auto-approve
 ```
 
 Save the outputs for later:
+
 ```bash
 terraform output -raw backend_bucket
 terraform output -raw backend_dynamodb_table
@@ -64,7 +65,7 @@ kubectl get nodes
 ## 5. Destroy infrastructure
 
 ```bash
-cd eks && terraform destroy -var-file=../terraform.tfvars
-cd ../vpc && terraform destroy -var-file=../terraform.tfvars
-cd ../backend && terraform destroy -var-file=../terraform.tfvars
+cd eks && terraform destroy -var-file=../terraform.tfvars -auto-approve
+cd ../vpc && terraform destroy -var-file=../terraform.tfvars -auto-approve
+cd ../backend && terraform destroy -var-file=../terraform.tfvars -auto-approve
 ```
