@@ -15,7 +15,7 @@ cd backend
 terraform init
 terraform validate
 terraform plan  -var-file=../terraform.tfvars
-terraform apply -var-file=../terraform.tfvars
+terraform apply -var-file=../terraform.tfvars -auto-approve
 ```
 
 Save the outputs for later:
@@ -35,7 +35,7 @@ terraform init \
   -backend-config="use_lockfile=true"
 terraform validate
 terraform plan  -var-file=../terraform.tfvars
-terraform apply -var-file=../terraform.tfvars
+terraform apply -var-file=../terraform.tfvars -auto-approve
 ```
 
 ## 3. Create EKS cluster
@@ -49,7 +49,7 @@ terraform init \
   -backend-config="use_lockfile=true"
 terraform validate
 terraform plan  -var-file=../terraform.tfvars
-terraform apply -var-file=../terraform.tfvars
+terraform apply -var-file=../terraform.tfvars -auto-approve
 ```
 
 ## 4. Access the cluster
