@@ -9,6 +9,10 @@ data "terraform_remote_state" "vpc" {
 
 data "aws_caller_identity" "current" {}
 
+locals {
+  principal_arn = data.aws_caller_identity.current.arn
+}
+
 module "eks" {
   source  = "terraform-aws-modules/eks/aws"
   version = "~> 20.4"
@@ -26,7 +30,7 @@ module "eks" {
 
   access_entries = {
     creator = {
-      principal_arn     = data.aws_caller_identity.current.arn
+      principal_arn = local.principal_arn
       policy_associations = {
         cluster_admin = {
           policy_arn = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy"
