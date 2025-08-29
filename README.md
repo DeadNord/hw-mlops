@@ -20,7 +20,7 @@ terraform plan
 ## 2. Create terraform state
 
 ```bash
-terraform apply
+terraform apply -auto-approve
 ```
 
 ## 3. Access the cluster
@@ -34,7 +34,7 @@ kubectl get pods --all-namespaces
 ## 4. Destroy infrastructure
 
 ```bash
-terraform destroy
+terraform destroy -auto-approve
 # cd eks && terraform destroy -var-file=../terraform.tfvars -auto-approve
 # cd ../vpc && terraform destroy -var-file=../terraform.tfvars -auto-approve
 # cd ../backend && terraform destroy -var-file=../terraform.tfvars -auto-approve
