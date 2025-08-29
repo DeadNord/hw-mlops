@@ -54,3 +54,8 @@ variable "enable_dns_support" {
   description = "Enable DNS support in the VPC"
   type        = bool
 }
+
+variable "single_nat_gateway" {
+  description = "Whether to create a single NAT gateway"
+  type        = bool
+}

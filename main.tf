@@ -9,6 +9,7 @@ module "vpc" {
   enable_nat_gateway   = var.enable_nat_gateway
   enable_dns_hostnames = var.enable_dns_hostnames
   enable_dns_support   = var.enable_dns_support
+  single_nat_gateway   = var.single_nat_gateway
   tags                 = var.tags
   region               = var.region
   profile              = var.profile
@@ -31,11 +32,12 @@ module "eks" {
   gpu_max_size     = var.gpu_max_size
   gpu_desired_size = var.gpu_desired_size
 
-  vpc_state_bucket                = var.vpc_state_bucket
-  vpc_state_key                   = var.vpc_state_key
-  vpc_state_region                = var.vpc_state_region
+  vpc_id                          = module.vpc.vpc_id
+  private_subnets                 = module.vpc.private_subnets
   cluster_endpoint_public_access  = var.cluster_endpoint_public_access
   cluster_endpoint_private_access = var.cluster_endpoint_private_access
+  cluster_public_access_cidrs     = var.cluster_public_access_cidrs
+  cluster_admin_users             = var.cluster_admin_users
   region                          = var.region
   profile                         = var.profile
   tags                            = var.tags

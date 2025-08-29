@@ -138,6 +138,13 @@ variable "cluster_endpoint_private_access" {
   type        = bool
 }
 
+variable "cluster_public_access_cidrs" {
+  description = "List of CIDR blocks that can access the Amazon EKS public API server endpoint"
+  type        = list(string)
+  default     = ["0.0.0.0/0"]
+}
+
+
 variable "billing_mode" {
   description = "Billing mode for DynamoDB table"
   type        = string
@@ -162,4 +169,15 @@ variable "vpc_state_bucket" {
 variable "vpc_state_region" {
   description = "Region of the VPC state bucket"
   type        = string
+}
+
+variable "cluster_admin_users" {
+  description = "List of IAM user ARNs to be granted cluster admin access"
+  type        = list(string)
+  default     = []
+}
+
+variable "single_nat_gateway" {
+  description = "Whether to create a single NAT gateway"
+  type        = bool
 }
