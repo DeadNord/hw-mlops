@@ -11,7 +11,7 @@ This project provisions a complete environment on AWS using Terraform. It includ
 ## 1. Initialize terraform
 
 ```bash
-terraform init
+terraform init -reconfigure
 terraform validate
 terraform fmt
 terraform plan
@@ -20,7 +20,7 @@ terraform plan
 ## 2. Create terraform state
 
 ```bash
-terraform init
+terraform apply
 ```
 
 ## 3. Access the cluster

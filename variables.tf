@@ -134,6 +134,11 @@ variable "cluster_public_access_cidrs" {
   default     = ["0.0.0.0/0"]
 }
 
+variable "backend_bucket" {
+  description = "S3 bucket for Terraform state"
+  type        = string
+}
+
 variable "tags" {
   description = "Common tags applied to resources"
   type        = map(string)
