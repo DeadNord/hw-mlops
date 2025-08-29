@@ -1,3 +1,7 @@
+# Backend configuration for storing Terraform state
+# Local backend for development
 terraform {
-  backend "s3" {}
+  backend "local" {
+    path = "terraform.tfstate"
+  }
 }

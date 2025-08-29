@@ -9,16 +9,6 @@ variable "profile" {
   default     = null
 }
 
-variable "backend_bucket" {
-  description = "S3 bucket for Terraform state"
-  type        = string
-}
-
-variable "backend_dynamodb_table" {
-  description = "DynamoDB table for state locking"
-  type        = string
-}
-
 variable "vpc_state_key" {
   description = "Path to VPC state file"
   type        = string
@@ -142,17 +132,6 @@ variable "cluster_public_access_cidrs" {
   description = "List of CIDR blocks that can access the Amazon EKS public API server endpoint"
   type        = list(string)
   default     = ["0.0.0.0/0"]
-}
-
-
-variable "billing_mode" {
-  description = "Billing mode for DynamoDB table"
-  type        = string
-}
-
-variable "force_destroy" {
-  description = "Whether to force destroy the S3 bucket"
-  type        = bool
 }
 
 variable "tags" {
