@@ -34,7 +34,7 @@ kubectl get pods --all-namespaces
 ## 4. Deploy ArgoCD
 
 ```bash
-cd argocd
+cd ./argocd
 terraform init -reconfigure
 terraform fmt -check
 terraform validate
@@ -44,11 +44,14 @@ kubectl get pods -n infra-tools
 
 ## 5. Open ArgoCD UI
 
+Open <http://localhost:8080> in your browser.
+
 ```bash
+cd ../
 kubectl -n infra-tools port-forward svc/argocd-server 8080:443
 ```
 
-Open <http://localhost:8080> in your browser. Log in with user `admin` and the password fetched via:
+Log in with user `admin` and the password fetched via:
 
 ```bash
 kubectl -n infra-tools get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
@@ -57,6 +60,7 @@ kubectl -n infra-tools get secret argocd-initial-admin-secret -o jsonpath="{.dat
 ## 6. Prepare MLflow chart repository
 
 Update the `repoURL` field in `applications/mlflow-application.yaml` to point to that repository.
+
 ```bash
 https://github.com/DeadNord/hw-mlops-hw7
 ```
