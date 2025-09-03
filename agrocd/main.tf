@@ -22,8 +22,3 @@ resource "helm_release" "argocd" {
     file("${path.module}/values/argocd-values.yaml")
   ]
 }
-
-output "argocd_namespace" {
-  description = "Namespace where ArgoCD is installed"
-  value       = kubernetes_namespace.argocd.metadata[0].name
-}
