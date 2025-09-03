@@ -9,7 +9,7 @@ spec:
     # Update repoURL to point to the repo containing the mlflow-chart directory
     repoURL: https://github.com/DeadNord/hw-mlops-hw7
     targetRevision: main
-    path: mlflow-chart
+    path: .
     helm:
       values: |
         service:
