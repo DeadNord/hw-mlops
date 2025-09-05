@@ -57,12 +57,12 @@ Log in with user `admin` and the password fetched via:
 kubectl -n infra-tools get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
 ```
 
-## 6. Prepare MLflow chart repository
+## 6. Configure MLflow chart repository
 
-Update the `repoURL` field in `applications/mlflow-application.yaml` to point to that repository.
+Ensure the `repoURL` in `applications/mlflow-application.yaml` points to the Bitnami chart repository:
 
 ```bash
-https://github.com/DeadNord/hw-mlops-hw7
+https://charts.bitnami.com/bitnami
 ```
 
 ## 7. Deploy MLflow Application
