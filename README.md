@@ -34,7 +34,7 @@ kubectl get pods --all-namespaces
 ## 4. Deploy ArgoCD
 
 ```bash
-cd ./argocd
+cd ./agrocd
 terraform init -reconfigure
 terraform fmt -check
 terraform validate
