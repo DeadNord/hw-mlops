@@ -69,10 +69,12 @@ https://github.com/DeadNord/hw-mlops.git
 
 The ArgoCD Application definition resides in [applications/mlflow-application.yaml](applications/mlflow-application.yaml).
 
+Open <http://localhost:5000> in your browser.
+
 ```bash
 kubectl apply -f application/mlflow-application.yaml
 kubectl get pods -n mlflow
-kubectl -n mlflow port-forward svc/mlflow 5000:5000
+kubectl -n mlflow port-forward svc/mlflow-service 5000:5000
 ```
 
 ## 8. Destroy infrastructure
