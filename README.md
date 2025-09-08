@@ -70,7 +70,7 @@ https://github.com/DeadNord/hw-mlops.git
 The ArgoCD Application definition resides in [applications/mlflow-application.yaml](applications/mlflow-application.yaml).
 
 ```bash
-kubectl apply -f applications/mlflow-application.yaml
+kubectl apply -f application/mlflow-application.yaml
 kubectl get pods -n mlflow
 kubectl -n mlflow port-forward svc/mlflow 5000:5000
 ```
