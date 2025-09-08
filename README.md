@@ -62,7 +62,7 @@ kubectl -n infra-tools get secret argocd-initial-admin-secret -o jsonpath="{.dat
 Ensure the `repoURL` in `applications/mlflow-application.yaml` points to the Bitnami chart repository:
 
 ```bash
-https://charts.bitnami.com/bitnami
+https://github.com/DeadNord/hw-mlops.git
 ```
 
 ## 7. Deploy MLflow Application
