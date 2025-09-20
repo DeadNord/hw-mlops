@@ -60,7 +60,7 @@ kubectl -n infra-tools get secret argocd-initial-admin-secret -o jsonpath="{.dat
 
 ## 6. Bootstrap the ML Ops stack via ArgoCD
 
-Apply the application-of-applications manifest from this repository. It points ArgoCD at the `mlops-experiments/argocd/applications/` directory so every component manifest committed there becomes part of the stack automatically. Update the `targetRevision` field in the manifest if you need ArgoCD to track a different repository branch.
+Apply the application-of-applications manifest from this repository. It points ArgoCD at the `mlops-experiments/argocd/applications/` directory so every component manifest committed there becomes part of the stack automatically.
 
 ```bash
 kubectl apply -f application/mlflow-application.yaml
