@@ -64,7 +64,6 @@ Apply the application-of-applications manifest from this repository. It points A
 
 ```bash
 kubectl apply -f application/mlflow-application.yaml
-kubectl get applications -n infra-tools
 ```
 
 ## 7. Confirm ArgoCD synchronization
