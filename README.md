@@ -12,8 +12,8 @@ This project provisions a complete environment on AWS using Terraform. It includ
 
 ```bash
 terraform init -reconfigure
-terraform validate
 terraform fmt
+terraform validate
 terraform plan
 ```
 
