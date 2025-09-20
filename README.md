@@ -93,15 +93,28 @@ All applications should remain in the `Healthy/Synced` state in ArgoCD.
 
 Open the required services locally before running experiments:
 
+MLflow Tracking UI <http://localhost:5000>
+
 ```bash
-# MLflow Tracking UI
 kubectl -n application port-forward svc/mlflow 5000:5000
+```
 
-# MinIO S3 endpoint
-kubectl -n application port-forward svc/minio 9000:9000
+MinIO S3 endpoint <http://localhost:9001>
 
-# (за потреби) Prometheus PushGateway
+```bash
+kubectl -n application port-forward svc/minio 9001:9001
+```
+
+Prometheus PushGateway <http://localhost:9091>
+
+```bash
 kubectl -n monitoring port-forward svc/pushgateway-prometheus-pushgateway 9091:9091
+```
+
+Grafana UI <http://localhost:3000>
+```bash
+GRAFANA_SVC=$(kubectl -n monitoring get svc -l app.kubernetes.io/name=grafana -o jsonpath='{.items[0].metadata.name}')
+kubectl -n monitoring port-forward svc/$GRAFANA_SVC 3000:3000
 ```
 
 ## 10. Prepare the local environment for experiments
@@ -113,17 +126,7 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-Create a `.env` file next to `train_and_push.py` with the following variables:
-
-```env
-MLFLOW_TRACKING_URI=http://localhost:5000
-AWS_ACCESS_KEY_ID=minio
-AWS_SECRET_ACCESS_KEY=minio123
-MLFLOW_S3_ENDPOINT_URL=http://localhost:9000
-PUSHGATEWAY_URL=http://pushgateway.monitoring.svc.cluster.local:9091
-```
-
-Adjust the values to match your cluster if they differ.
+Create a `.env` file next to `train_and_push.py`.
 
 ## 11. Run `train_and_push.py`
 
