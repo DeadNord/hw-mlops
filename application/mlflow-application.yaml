@@ -11,7 +11,7 @@ spec:
   project: default
   source:
     repoURL: https://github.com/DeadNord/hw-mlops.git
-    targetRevision: main
+    targetRevision: lesson-8-9
     path: mlops-experiments/argocd/applications
     directory:
       recurse: true
