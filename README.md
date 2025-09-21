@@ -111,9 +111,22 @@ Prometheus PushGateway <http://localhost:9091>
 kubectl -n monitoring port-forward svc/pushgateway-prometheus-pushgateway 9091:9091
 ```
 
+Prometheus UI <http://localhost:9090>
+
+```bash
+kubectl -n monitoring port-forward svc/kube-prometheus-stack-prometheus 9090:9090
+```
+
 Grafana UI <http://localhost:3000>
+
 ```bash
 kubectl -n monitoring port-forward svc/grafana 3000:80
+```
+
+Grafana admin password
+
+```bash
+kubectl get secret monitoring-grafana -n monitoring -o jsonpath="{.data.admin-password}" | base64 -d
 ```
 
 ## 10. Prepare the local environment for experiments
