@@ -33,9 +33,9 @@ cluster_admin_users             = []
 cpu_instance_type = "t3.small"
 gpu_instance_type = "g4dn.xlarge"
 
-cpu_min_size     = 2
-cpu_max_size     = 2
-cpu_desired_size = 2
+cpu_min_size     = 3
+cpu_max_size     = 3
+cpu_desired_size = 3
 
 gpu_min_size     = 0
 gpu_max_size     = 1
