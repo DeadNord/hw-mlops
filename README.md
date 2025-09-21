@@ -126,7 +126,7 @@ kubectl -n monitoring port-forward svc/grafana 3000:80
 Grafana admin password
 
 ```bash
-kubectl get secret monitoring-grafana -n monitoring -o jsonpath="{.data.admin-password}" | base64 -d
+kubectl get secret grafana -n monitoring -o jsonpath="{.data.admin-password}" | base64 -d
 ```
 
 ## 10. Prepare the local environment for experiments
