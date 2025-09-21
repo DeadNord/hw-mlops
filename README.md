@@ -99,10 +99,10 @@ MLflow Tracking UI <http://localhost:5000>
 kubectl -n application port-forward svc/mlflow 5000:5000
 ```
 
-MinIO S3 endpoint <http://localhost:9001>
+MinIO S3 endpoint <http://localhost:9000>
 
 ```bash
-kubectl -n application port-forward svc/minio 9001:9001
+kubectl -n application port-forward svc/minio 9000:9000
 ```
 
 Prometheus PushGateway <http://localhost:9091>
