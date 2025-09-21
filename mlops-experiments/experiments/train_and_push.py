@@ -177,7 +177,7 @@ def main() -> None:
                 }
             )
 
-            clf = SGDClassifier(
+            clf_kwargs = dict(
                 loss="log_loss",
                 learning_rate="constant",
                 eta0=learning_rate,
@@ -185,10 +185,14 @@ def main() -> None:
                 tol=1e-4,  # маленький tol, чтобы не останавливаться слишком рано
                 alpha=alpha,
                 penalty=penalty,
-                l1_ratio=l1_ratio if penalty == "elasticnet" else None,
                 random_state=seed,
                 average=False,
             )
+
+            if penalty == "elasticnet" and l1_ratio is not None:
+                clf_kwargs["l1_ratio"] = l1_ratio
+
+            clf = SGDClassifier(**clf_kwargs)
 
             clf.fit(X_train, y_train)
             y_pred = clf.predict(X_test)
