@@ -105,6 +105,12 @@ MinIO S3 endpoint <http://localhost:9000>
 kubectl -n application port-forward svc/minio 9000:9000
 ```
 
+MinIO S3 UI <http://localhost:9001>
+
+```bash
+kubectl -n application port-forward svc/minio 9001:9001
+```
+
 Prometheus PushGateway <http://localhost:9091>
 
 ```bash
@@ -145,9 +151,9 @@ Create a `.env` file next to `train_and_push.py`.
 1. Verify that the port-forward sessions are still active.
 2. Start the experiment:
 
-   ```bash
-   python train_and_push.py
-   ```
+```bash
+python train_and_push.py
+```
 
 The script runs several training cycles with different hyperparameters, logs them to MLflow, pushes the `mlflow_accuracy` and `mlflow_loss` metrics to PushGateway, and copies the best-performing model into `mlops-experiments/best_model/`.
 
