@@ -10,7 +10,11 @@ from typing import Dict, List
 
 from dotenv import load_dotenv
 from prometheus_client import CollectorRegistry, Gauge, push_to_gateway
-from prometheus_client.exposition import PushGatewayException
+
+try:  # prometheus-client>=0.19 removed PushGatewayException
+    from prometheus_client.exposition import PushGatewayException
+except ImportError:  # pragma: no cover - depends on library version
+    PushGatewayException = Exception
 
 load_dotenv()
 

@@ -113,8 +113,7 @@ kubectl -n monitoring port-forward svc/pushgateway-prometheus-pushgateway 9091:9
 
 Grafana UI <http://localhost:3000>
 ```bash
-GRAFANA_SVC=$(kubectl -n monitoring get svc -l app.kubernetes.io/name=grafana -o jsonpath='{.items[0].metadata.name}')
-kubectl -n monitoring port-forward svc/$GRAFANA_SVC 3000:3000
+kubectl -n monitoring port-forward svc/grafana 3000:80
 ```
 
 ## 10. Prepare the local environment for experiments
