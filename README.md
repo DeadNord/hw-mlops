@@ -163,8 +163,9 @@ The script runs several training cycles with different hyperparameters, logs the
 - Grafana -> Explore -> Prometheus: query `mlflow_accuracy` and `mlflow_loss` to view the metrics labeled with `run_id`.
 
 Interface screenshots:
-`docs/mlflow-ui.png`
-`docs/grafana-explore.png`
+![MLflow](docs/mlflow.png)
+![Metrics](docs/metrics.png)
+![Best model](docs/best_model.png)
 
 ## 13. Run additional checks
 

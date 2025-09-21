@@ -39,7 +39,7 @@ PUSHGATEWAY_URL = os.getenv(
 JOB_NAME = os.getenv("PUSHGATEWAY_JOB", "mlflow_experiments")
 
 # Глобальные «рычаги» длительности:
-MAX_RUNS = int(os.getenv("MAX_RUNS", "400"))  # верхний предел числа запусков
+MAX_RUNS = int(os.getenv("MAX_RUNS", "100"))  # верхний предел числа запусков
 SEEDS = (1, 42)
 
 
