@@ -40,7 +40,7 @@ JOB_NAME = os.getenv("PUSHGATEWAY_JOB", "mlflow_experiments")
 
 # Глобальные «рычаги» длительности:
 MAX_RUNS = int(os.getenv("MAX_RUNS", "400"))  # верхний предел числа запусков
-N_SEEDS = int(os.getenv("N_SEEDS", "5"))  # сколько разных random_state
+SEEDS = (1, 42)
 
 
 # Сетки (можно переопределить строками вида "0.001,0.003,0.01")
@@ -107,7 +107,7 @@ def _grid() -> List[Dict[str, Optional[float]]]:
     ):
         if penalty == "elasticnet":
             for l1 in L1_RATIOS:
-                for seed in range(N_SEEDS):
+                for seed in SEEDS:
                     combos.append(
                         dict(
                             learning_rate=lr,
@@ -119,7 +119,7 @@ def _grid() -> List[Dict[str, Optional[float]]]:
                         )
                     )
         else:
-            for seed in range(N_SEEDS):
+            for seed in SEEDS:
                 combos.append(
                     dict(
                         learning_rate=lr,
@@ -227,7 +227,7 @@ def main() -> None:
     if not results:
         raise RuntimeError("No runs were executed, check configuration.")
 
-    best_run = max(results, key=lambda item: item["accuracy"])
+    best_run = max(results, key=lambda item: (item["accuracy"], -item["loss"]))
     print(
         "🏆 Best run:"
         f" {best_run['run_id']} with accuracy={best_run['accuracy']:.4f}"
